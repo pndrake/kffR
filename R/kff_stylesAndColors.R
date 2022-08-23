@@ -9,7 +9,5 @@ kff_colors$blue3 <- rgb(19, 120, 189, maxColorValue = 255)
 kff_colors$blue4 <- rgb(12, 91, 152, maxColorValue = 255)
 kff_colors$blue5 <- rgb(10, 63, 100, maxColorValue = 255)
 
+kff_colors$orange <- "#F5821F"
 
-
-# Set up color scales:
-#kff_colors$kff_scaleLinear <-

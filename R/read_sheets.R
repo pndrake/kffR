@@ -1,10 +1,11 @@
 # Used to clean SHF google sheets as read in by googlesheets4::read_sheet()
 
-
+#"Total Monthly Medicaid and CHIP Enrollment"
 read_sheets <- function(docURL,
                         indicatorName,
                         includeNotes = FALSE,
                         sheetName = "Year",
+                        numberOfSheets = 0,
                         naString = "N/A"){
 
   tryCatch({
@@ -15,6 +16,26 @@ read_sheets <- function(docURL,
   if(!includeNotes){
     vec_sheetNames <- vec_sheetNames[!grepl("^Notes", vec_sheetNames)]
   }
+
+  # Subset sheet names to user selection:
+  if(numberOfSheets > 0){
+
+    n <- length(vec_sheetNames)
+
+    # If the user has selected more sheets than exist, return all that exist
+    if(numberOfSheets > n){
+      numberOfSheets <- n
+    }
+
+    index_startSheet <- (n + 1) - numberOfSheets
+    index_endSheet   <- n
+
+    index_startSheet <- 1
+    index_endSheet   <- index_startSheet + (numberOfSheets - 1)
+
+    vec_sheetNames <- vec_sheetNames[index_startSheet:index_endSheet]
+  }
+
 
   # Read in the data on every sheet
   list_sheetData <- lapply(vec_sheetNames,
@@ -143,14 +164,20 @@ read_sheets <- function(docURL,
                                )
                              }
                              # Combine the character and numeric data framtes
-                             df_all %>%
+                            df_forOut <-  df_all %>%
                                dplyr::rowwise() %>%
                                # Add in the modifier we extracted from the first row of the google sheet:
                                dplyr::mutate(Type = vec_headerRow[which(Category == names(vec_headerRow))]) %>%
                                # Clean out text added by R to the category column:
                                dplyr::mutate(Category = gsub("\\.\\.\\.[0-9]*", "", Category)) %>%
                                dplyr::mutate(Category = gsub(paste0("^", value_seperator), "", Category)) %>%
-                               dplyr::mutate(Category = gsub(paste0(value_seperator,"$"), "", Category)) %>%
+                               dplyr::mutate(Category = gsub(paste0(value_seperator,"$"), "", Category))
+
+                            # If all records in this dataset are characters or numbers, add the other type for consistency
+                            if(!"Value" %in% names(df_forOut)) df_forOut$Value <- NA
+                            if(!"Value_character" %in% names(df_forOut)) df_forOut$Value_character <- NA
+
+                            df_forOut %>%
                                # Move the new columns to the left next to State
                                dplyr::relocate(State, Year, Indicator, Category, Type, Value)  %>%
                                # Remove any grouping/rowwise settings from this dataframe
