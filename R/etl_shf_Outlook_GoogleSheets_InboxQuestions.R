@@ -1,9 +1,6 @@
 
 
-library(Microsoft365R)
-library(googlesheets4)
-
-
+etl_outlookToGS  <- function(){
 
 # Parameters ----
 # How many emails do we want to read in?
@@ -42,3 +39,4 @@ for(i in 1:length(list_latestEmails)){
 
 list_inboxQuestions
 
+}

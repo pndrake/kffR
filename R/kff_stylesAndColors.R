@@ -11,3 +11,7 @@ kff_colors$blue5 <- rgb(10, 63, 100, maxColorValue = 255)
 
 kff_colors$orange <- "#F5821F"
 
+kff_colors$green <- "#00BC87"
+
+kff_colors$grey <- "#CCCCCC"
+

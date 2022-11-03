@@ -274,8 +274,6 @@ medicaidStateClean$Washington <- function() {
   months_raw <- na.omit(str_extract(row_months, "[0-9]{6}"))
   values_raw <- row_enrollmentTotals[row_months %in% months_raw] %>% unlist() %>% as.numeric()
 
-
-
   df_enrollment <- cbind(months_raw,
                          values_raw) %>%
     as.data.frame(row.names = FALSE) %>%

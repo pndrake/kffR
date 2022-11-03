@@ -1,15 +1,20 @@
 
-
 fetchIndicator <- function(indicatorName,
                            sheetName = "Year",
                            numberOfSheets = 0,
+                           URL = "None",
                            printURL = FALSE){
 
+
+  if(URL == "None"){
+
   # Load indicator table
+  loadIndicatorList()
+
   # Note: only does this the first time of this session:
-  if((!exists("df_indicators"))) {
-    df_indicators <<- kffR::shf_listIndicators()
-  }
+  # if((!exists("df_indicators"))) {
+  #   df_indicators <<- kffR::shf_listIndicators()
+  # }
 
   # Does the requested indicator exist?
   if(!indicatorName %in% df_indicators$Indicator) return(NA)
@@ -19,6 +24,9 @@ fetchIndicator <- function(indicatorName,
   thisDocURL <- df_indicators %>%
     filter(Indicator %in% c(indicatorName)) %>%
     pull(DocURL)
+  } else {
+    thisDocURL <- URL
+  }
 
   if(printURL) print(thisDocURL)
 

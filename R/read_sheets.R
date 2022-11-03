@@ -163,7 +163,7 @@ read_sheets <- function(docURL,
                                  )
                                )
                              }
-                             # Combine the character and numeric data framtes
+                             # Combine the character and numeric data frames
                             df_forOut <-  df_all %>%
                                dplyr::rowwise() %>%
                                # Add in the modifier we extracted from the first row of the google sheet:
