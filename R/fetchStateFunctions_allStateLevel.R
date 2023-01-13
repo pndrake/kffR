@@ -183,11 +183,11 @@ medicaidStateFetch$Arkansas <-
 
   }
 medicaidStateFetch$Arizona <-
-  function(stateURL = "https://www.azahcccs.gov/Resources/Reports/federal.html") {
+  function(stateURL =  "https://www.azahcccs.gov/Resources/Reports/population.html") {
 
     fetchAll = FALSE
-    linkPatternToMatch <- "PopulationHighlights"
-    filePatternToMatch <- "/[a-zA-Z0-9_ -]*.pdf"
+    linkPatternToMatch <- "Highlights"
+    filePatternToMatch <- "/[a-zA-Z0-9_ -.]*.pdf"
 
     tryCatch({
 
@@ -205,10 +205,8 @@ medicaidStateFetch$Arizona <-
       vec_hrefs <- nodeset_links %>% rvest::html_attr("href")
       vec_text <- nodeset_links %>% rvest::html_text()
 
-
       index_stateLevelMonthlyReport <-
         grepl(linkPatternToMatch, vec_hrefs)
-
 
       # Subset to a list of relevant links:
       vec_hres_enrollment <-
@@ -272,6 +270,7 @@ medicaidStateFetch$Arizona <-
       return(text_failed)
     })
   }
+
 
 medicaidStateFetch$Colorado <-
   function(stateURL = "https://hcpf.colorado.gov/premiums-expenditures-and-caseload-reports",
@@ -877,7 +876,7 @@ medicaidStateFetch$Iowa <-
     linkPatternToMatch <- "MCO[_%]counts[_%]"
     tryCatch({
 
-      StorageFilePath = "./State Data Downloads/South Carolina"
+      StorageFilePath = "./State Data Downloads/Iowa"
 
       # Direction of new links added to the page:
       # Newest data are at the top
@@ -1510,6 +1509,8 @@ medicaidStateFetch$Michigan<-
 
 # do this one manually
 #https://medicaid.ms.gov/resources/
+
+
 medicaidStateFetch$Minnesota<-
   function(stateURL = "https://www.dhs.state.mn.us/main/idcplg?IdcService=GET_DYNAMIC_CONVERSION&RevisionSelectionMethod=LatestReleased&dDocName=DHS16_141529",
            fetchAll = FALSE) {
@@ -1905,7 +1906,10 @@ medicaidStateFetch$Nebraska <-
         return(text_failed)
       })
     }
-medicaidStateFetch$NewMexico <- function(fetchAll = FALSE) {
+
+# Work in progress: need to figure out how to find latest month file
+medicaidStateFetch$NewMexico <- function(stateURL = "https://www.hsd.state.nm.us/medicaid-eligibility-reports/",
+                                          fetchAll = FALSE) {
   tryCatch({
     StorageFilePath = "./State Data Downloads/New Mexico"
 
@@ -1915,8 +1919,7 @@ medicaidStateFetch$NewMexico <- function(fetchAll = FALSE) {
     # Newest data are at the top
 
     # Set up the html session:
-    stateURL <-
-      "https://www.hsd.state.nm.us/medicaid-eligibility-reports/"
+
     session <- rvest::session(stateURL)
 
     # Obtain a list of all nodes that have links (aka href) present on this page:

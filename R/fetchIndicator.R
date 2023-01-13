@@ -16,6 +16,7 @@ fetchIndicator <- function(indicatorName,
   #   df_indicators <<- kffR::shf_listIndicators()
   # }
 
+  # Check the sheet before pulling any data----
   # Does the requested indicator exist?
   if(!indicatorName %in% df_indicators$Indicator) return(NA)
   # Does the requested indicator have a URL:
@@ -28,6 +29,7 @@ fetchIndicator <- function(indicatorName,
     thisDocURL <- URL
   }
 
+  # If user requested the URL, show it to them:
   if(printURL) print(thisDocURL)
 
   # Load the requested table:
