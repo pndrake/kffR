@@ -6,7 +6,7 @@ read_sheets <- function(docURL,
                         includeNotes = FALSE,
                         sheetName = "Year",
                         numberOfSheets = 0,
-                        specificSheets = "none", # specify a sheet name to read in (overwrites numberOfSheets)
+                        specificSheets = "None", # specify a sheet name to read in (overwrites numberOfSheets)
                         naString = "N/A"){
 
   tryCatch({
@@ -37,7 +37,7 @@ read_sheets <- function(docURL,
     vec_sheetNames <- vec_sheetNames[index_startSheet:index_endSheet]
   }
 
-  if(specificSheets != "none"){
+  if(specificSheets != "None"){
     vec_sheetNames <- specificSheets
   }
 
