@@ -37,6 +37,7 @@ fetchIndicator <- function(indicatorName,
   df_thisIndicator <- thisDocURL %>%
     kffR::read_sheets(indicatorName = indicatorName,
                       numberOfSheets = numberOfSheets,
+                      specificSheets = specificSheets,
                       sheetName = sheetName)
 
   # Mark that indicators don't need to be reloaded

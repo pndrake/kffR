@@ -10,6 +10,7 @@ read_sheets <- function(docURL,
                         naString = "N/A"){
 
   tryCatch({
+
   # Read in a list of all the sheets in this google sheet
   vec_sheetNames <- googlesheets4::sheet_names(docURL)
 
