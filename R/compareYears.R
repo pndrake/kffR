@@ -11,9 +11,9 @@ compareYears <- function(Indicator, url = NA, makePlot = TRUE){
 
 
   if(is.na(url)){ # if requested, read in a live SHF indicator
-    df_thisIndicator_raw <- kffR::fetchIndicator(Indicato )
+    df_thisIndicator_raw <- fetchIndicator(Indicato )
   } else { # Otherwise, pull in data from the url of a non-live SHF sheet
-    df_thisIndicator_raw <- kffR::fetchIndicator(indicatorName = Indicator,
+    df_thisIndicator_raw <- fetchIndicator(indicatorName = Indicator,
                                                  URL = url )
   }
 
