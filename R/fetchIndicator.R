@@ -14,7 +14,7 @@ fetchIndicator <- function(indicatorName,
 
   # Note: only does this the first time of this session:
   # if((!exists("df_indicators"))) {
-  #   df_indicators <<- kffR::shf_listIndicators()
+  #   df_indicators <<- shf_listIndicators()
   # }
 
   # Check the sheet before pulling any data----
@@ -35,7 +35,7 @@ fetchIndicator <- function(indicatorName,
 
   # Load the requested table:
   df_thisIndicator <- thisDocURL %>%
-    kffR::read_sheets(indicatorName = indicatorName,
+    read_sheets(indicatorName = indicatorName,
                       numberOfSheets = numberOfSheets,
                       specificSheets = specificSheets,
                       sheetName = sheetName)

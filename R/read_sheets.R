@@ -93,7 +93,7 @@ read_sheets <- function(docURL,
                                       Indicator = indicatorName) %>%
                                dplyr::rename(State = paste0("...1", value_seperator)) %>%
                                # Clean the sheet
-                               kffR::clean_sheet() %>%
+                               clean_sheet() %>%
                                # Remove any null values if they are present:
                                rowwise() %>%
                                mutate_all(function(x){

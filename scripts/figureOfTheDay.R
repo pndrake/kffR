@@ -5,7 +5,7 @@ library(tidyverse)
 
 
 # Load the list of indicators in SHFs
-df_indicators <- kffR::shf_listIndicators()
+df_indicators <- shf_listIndicators()
 
 
 # Attempt 1: Home and community based care for the elderly----
@@ -27,7 +27,7 @@ possibleMatches <- c("Medicaid Benefits: Program of All-Inclusive Care for the E
 df_indicators %>%
   filter(Indicator %in% c(possibleMatches))
 
-kffR::read_sheets()
+read_sheets()
 
 ggplot +
   theme_KFF()

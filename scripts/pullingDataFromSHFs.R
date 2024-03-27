@@ -3,7 +3,7 @@
 # 1. why did
 # "https://docs.google.com/spreadsheets/d/1ZJBWBMfs7QrRNq53hMrFzMHM8DvAVhHbMFN-0L65DUY/edit#gid=1194362909"
 # return NA
-# from kffR::read_sheets(x)
+# from read_sheets(x)
 
 
 library(future.apply)
@@ -16,7 +16,7 @@ Snow
 
 
 # Load a complete list of State Health Facts Indicators-----
-df_indicators <- kffR::shf_listIndicators()
+df_indicators <- shf_listIndicators()
 future_mapply()
 
 
@@ -24,7 +24,7 @@ future_mapply()
 n = 3
 system.time({
   list_df_shf <- future_mapply(function(x,y){
-    kffR::read_sheets(x, y)
+    read_sheets(x, y)
   },
   df_indicators$DocURL[1:n],
   df_indicators$Indicator[1:n]
@@ -37,7 +37,7 @@ system.time({
 
 
 # Load a complete list of State Health Facts Indicators-----
-df_indicators <- kffR::shf_listIndicators()
+df_indicators <- shf_listIndicators()
 
 n = 4
 
@@ -50,7 +50,7 @@ for(i in 1:n){
 system.time({
     list_df_shf <- lapply(indicatorInfo,
                           function(x){
-      kffR::read_sheets(x[1], x[2]) %>%
+      read_sheets(x[1], x[2]) %>%
         return()
     })
 })
@@ -72,7 +72,7 @@ system.time({
     indicatorInfo,
     function(x){
       print(x)
-      kffR::read_sheets(x[1], x[2]) %>%
+      read_sheets(x[1], x[2]) %>%
         return()
     },
     future.seed = NULL
@@ -93,7 +93,7 @@ system.time({
 for(i in 1:n){
   print(i)
   x = indicatorInfo[[i]]
-  list_shf[[i]] <- kffR::read_sheets(x[1], x[2])
+  list_shf[[i]] <- read_sheets(x[1], x[2])
 }
 })
 list_df_shf
