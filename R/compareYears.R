@@ -4,7 +4,7 @@ library(viridis)
 
 
 
-url = url_totalHospitals
+#url = url_totalHospitals
 url = "https://docs.google.com/spreadsheets/d/1UDQCMZrtMut213aoge-eQt7g_C0UYckBnbcQmRTries/edit#gid=1329887062"
 
 compareYears <- function(Indicator, url = NA, makePlot = TRUE){
