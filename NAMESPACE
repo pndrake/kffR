@@ -3,7 +3,7 @@ import(tidyverse)
 import(dplyr)
 import(magick)
 import(googlesheets4)
-export fetchIndicator
-export read_sheets
-export shf_listIndicators
+export(fetchIndicator)
+export(read_sheets)
+export(shf_listIndicators)
 
