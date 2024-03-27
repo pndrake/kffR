@@ -88,7 +88,7 @@ medicaidStateFetch$Alaska <-
 # Work in progress
 # Note: the links are present on the page, but can't find them through rvest session
 medicaidStateFetch$Arkansas <-
-  function(stateURL = "https://www.azahcccs.gov/Resources/Reports/population.html",
+  function(stateURL = "https://humanservices.arkansas.gov/newsroom/medicaid-arworks-and-other-reports/&sa=D&source=editors&ust=1674235344578435&usg=AOvVaw1_S5eNWUMdCnAA8aWGkNS2",
            fetchAll = FALSE) {
     linkPatternToMatch <- "Monthly\\-Enrollment\\-and"
     tryCatch({
@@ -669,7 +669,7 @@ medicaidStateFetch$Florida <- function() {
     nodeset_links <- rvest::html_elements(css = "a", session)
 
     # Extract the links form those nodes:
-    vec_hrefs <- nodeset_links %>% html_attr("href")
+    vec_hrefs <- nodeset_links %>% rvest::html_attr("href")
 
     # Subset to a list of relevant links:
     vec_hres_enrollment <-
