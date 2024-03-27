@@ -1,5 +1,5 @@
 # Load the indicator list:
-df_indicators <- kffR::shf_listIndicators()
+df_indicators <- shfListIndicators()
 
 
 duplicateIndicator <- function(Indicator,
