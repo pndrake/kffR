@@ -1,6 +1,6 @@
 library(tidyverse)
 # Load the indicator list:
-df_indicators <- shf_listIndicators()
+df_indicators <- kffR::shf_listIndicators()
 
 googlesheets4::gs4_auth()
 kffcommon@gmail.com

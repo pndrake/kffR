@@ -1,6 +1,6 @@
 #
 # Note: will need to set up permissions of your google account to read/write spreadsheets
-shf_listIndicators <- function(){
+kffR::shf_listIndicators <- function(){
 
   url_sheet <- "https://docs.google.com/spreadsheets/d/12y734scgISKLaduk3g2QMtkKeA9ii31-w1q5JAY3pvQ/edit#gid=0"
 

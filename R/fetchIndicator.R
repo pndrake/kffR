@@ -14,7 +14,7 @@ fetchIndicator <- function(indicatorName,
 
   # Note: only does this the first time of this session:
   # if((!exists("df_indicators"))) {
-  #   df_indicators <<- shf_listIndicators()
+  #   df_indicators <<- kffR::shf_listIndicators()
   # }
 
   # Check the sheet before pulling any data----

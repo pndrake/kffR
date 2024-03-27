@@ -16,7 +16,7 @@ Snow
 
 
 # Load a complete list of State Health Facts Indicators-----
-df_indicators <- shf_listIndicators()
+df_indicators <- kffR::shf_listIndicators()
 future_mapply()
 
 
@@ -37,7 +37,7 @@ system.time({
 
 
 # Load a complete list of State Health Facts Indicators-----
-df_indicators <- shf_listIndicators()
+df_indicators <- kffR::shf_listIndicators()
 
 n = 4
 

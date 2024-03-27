@@ -5,7 +5,7 @@ library(tidyverse)
 
 
 # Load the list of indicators in SHFs
-#df_indicators <- shf_listIndicators()
+#df_indicators <- kffR::shf_listIndicators()
 
 
 # Attempt 1: Home and community based care for the elderly----
