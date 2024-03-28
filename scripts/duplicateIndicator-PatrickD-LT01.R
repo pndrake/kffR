@@ -1,9 +1,8 @@
 library(tidyverse)
-# Load the indicator list:
-df_indicators <- shfListIndicators()
+
+# loadIndicatorList()
 
 googlesheets4::gs4_auth()
-kffcommon@gmail.com
 # Metadata for created indicators is stored:
 # https://docs.google.com/spreadsheets/d/1y3uBO1qMHexOrtV5MeOKJPF0F2Pl8Eu3tRgwnq-v6Ps/edit#gid=0
 

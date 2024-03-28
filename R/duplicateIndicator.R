@@ -1,5 +1,4 @@
-# Load the indicator list:
-df_indicators <- shfListIndicators()
+# loadIndicatorList()
 
 
 duplicateIndicator <- function(Indicator,

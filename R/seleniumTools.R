@@ -4,8 +4,6 @@ selenium_setup <- function(){
   system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
   rD <- RSelenium::rsDriver(browser="firefox", port=4545L, verbose=F)
   remDr <- rD[["client"]]
-  return(list(rD, remDr))
+  return(remDr)
 }
 
-
-remDr <- selenium_setup()[[2]]

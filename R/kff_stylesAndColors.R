@@ -1,6 +1,3 @@
-
-
-# Create basic palette
 # Note: colors get darker as numbers get higher
 kff_colors <- list()
 # kff_colors$blue1 <- rgb(128, 187, 228, maxColorValue = 255)
@@ -37,4 +34,18 @@ kff_colors$political_grey <- "#CCCCCC"
 kff_colors$political_red3 <- "#7B131A"
 kff_colors$political_red2 <- "#A41A23"
 kff_colors$political_red1 <- "#CD202C"
+
+kff_colors$expanded_black <- "#001E36"
+kff_colors$expanded_darkblue <- "#004B87"
+kff_colors$expanded_lightblue <- "#336F9F"
+kff_colors$expanded_verydarkgreen <- "#003E31"
+kff_colors$expanded_darkgreen <- "#006751"
+kff_colors$expanded_lightgreen <- "#338574"
+kff_colors$expanded_brown <- "#3B203F"
+kff_colors$expanded_darkpurple <- "#58305F"
+kff_colors$expanded_lightpurple <- "#93509E"
+kff_colors$expanded_darkred <- "#A03E00"
+kff_colors$expanded_red <- "#CE601A"
+kff_colors$expanded_peach <- "#DE9566"
+
 

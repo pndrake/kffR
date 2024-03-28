@@ -1,4 +1,7 @@
 
+
+
+
 fetchIndicator <- function(indicatorName,
                            sheetName = "Year",
                            numberOfSheets = 0,
@@ -11,11 +14,6 @@ fetchIndicator <- function(indicatorName,
 
   # Load indicator table
   loadIndicatorList()
-
-  # Note: only does this the first time of this session:
-  # if((!exists("df_indicators"))) {
-  #   df_indicators <<- shfListIndicators()
-  # }
 
   # Check the sheet before pulling any data----
   # Does the requested indicator exist?
