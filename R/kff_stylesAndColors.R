@@ -12,9 +12,6 @@ kff_colors <- list()
 #
 # kff_colors$grey <- "#CCCCCC"
 
-
-
-
 kff_colors$blue3 <- "#001E36"
 kff_colors$blue2 <- "#004B87"
 kff_colors$blue1 <- "#1A81D4"

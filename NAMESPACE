@@ -1,5 +1,6 @@
 exportPattern("^[[:alpha:]]+")
 import(tidyverse)
+import(magrittr)
 import(dplyr)
 import(magick)
 import(googlesheets4)
