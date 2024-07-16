@@ -1,13 +1,11 @@
-# library(tidyverse)
+library(tidyverse)
 #
 #
-# # working document for duplicateIndicator.R
-# # Can delete once finihed
-# source("./R/duplicateIndicator.R")
-#
-#
-#
-# # duplicateIndicator("Population Distribution of Nonelderly Adults by Race/Ethnicity")
+source("./R/duplicateIndicator.R")
+
+kffR::duplicateIndicator("States with Firearm Laws Designed to Protect Children",deleteOldSheet = TRUE)
+
+duplicateIndicator("Medicaid Expansion Enrollment")
 #
 # sourceName = 'WONDER'
 #
@@ -17,10 +15,39 @@
 #   pull(Indicator) |>
 #   print()
 #
-# for (i  in 1:length(vec_indicatorsToDuplicate)) {
-#   thisIndicator <- vec_indicatorsToDuplicate[i] |> print()
-#   duplicateIndicator(thisIndicator)
-# }
+df_sophiasNewIndicators <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1ZuEudDHSaOCR0ie3qLVP5ZXyPHr4mcoOBPIMC1xaKqM/")
+df_indicatorsDuplicated <- googlesheets4::read_sheet("1y3uBO1qMHexOrtV5MeOKJPF0F2Pl8Eu3tRgwnq-v6Ps",
+                                                     sheet = "eers")
+vec_indicatorsToDuplicate <- df_sophiasNewIndicators |>
+  filter(Update %in% c("Yes")) |>
+  pull(`Indicator name` ) |>
+  print()
+
+vec_newToMake <- df_indicatorsDuplicated |>
+  filter(Missing == "Yes") |>
+  pull(`Indicator name`)
+setdiff(
+gsub(",[-a-zA-Z 0-9–]*$", "", vec_indicatorsToDuplicate),
+gsub(",[-a-zA-Z 0-9–]*$", "", df_indicatorsDuplicated$Indicator)
+)
+
+setdiff(vec_indicatorsToDuplicate,
+df_indicatorsDuplicated$Indicator)
+df_indicators <- kffR::shf_listIndicators()
+vec_newToMake %in% df_indicators$Indicator
+
+vec_indicatorsToDuplicate <- df_indicators |>
+  filter(Source %in% c("Atlas", "ATLAS")) |>
+  filter(Subcategory %in% c("Sexually Transmitted Infections"))  |>
+  pull(Indicator)
+for (i  in 1:length(vec_newToMake)) {
+  thisIndicator <- vec_newToMake[i] |> print()
+  duplicateIndicator(thisIndicator,
+                     makeNewSheet = TRUE,
+                     nameNewSheet =  "As of May 1, 2024")
+}
+
+
 #
 # # fixed: Broke on i = 41 # Cause = "'" in title on GS
 # for (i in 21:nrow(df_indicators_bhs)) {

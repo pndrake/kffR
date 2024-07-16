@@ -1,6 +1,4 @@
-# loadIndicatorList()
-
-
+# df_indicators <- kffR::shf_listIndicators()
 duplicateIndicator <- function(Indicator,
                                # Duplicate the latest year's data in new tab?
                                makeNewSheet = TRUE,
@@ -23,6 +21,14 @@ duplicateIndicator <- function(Indicator,
   this_source <- df_log_thisIndicator %>%
     pull(Source) %>% unique()
 
+
+  if(nrow(df_log_thisIndicator) > 1){
+    print("There are multiple indicators with this name. (Likely due to a duplicate existing for CSR")
+    print("Only copying the first one. . .")
+    df_log_thisIndicator <-  df_log_thisIndicator |>
+      filter(!is.na(Category)) |>
+      filter(row_number() == 1)
+  }
   # Check that the indicator information was loaded correctly
   # And that the requested indicator exists in the Indicator Log
   if(is.na(thisDocURL)) return("error: load tidyverse")
@@ -36,7 +42,6 @@ duplicateIndicator <- function(Indicator,
   # Find the ids for the current folder, and the archive folder
   driveInfo_oldSheet <- googledrive::drive_get(id_oldSheet)
   id_parentFolder <- googledrive::as_id(driveInfo_oldSheet$drive_resource[[1]]$parents[[1]])
-
 
   df_itemsInParentFolder <- googledrive::drive_ls(id_parentFolder)
   # Create the archive folder (if it doesn't exist)
@@ -61,8 +66,16 @@ duplicateIndicator <- function(Indicator,
   }
 
   df_newSheetInfo <- df_newSheetInfo %>%
-    mutate(Source = this_source,
+    mutate(Source = this_source[1],
            docURL = toURL(id))
+
+  df_newSheetInfo %>%
+    mutate(`Old URL` = toURL(id_oldSheet),
+           Date = Sys.Date()) %>%
+    select(Date, Source, Indicator = name, `New URL` = docURL, `Old URL`) %>%
+    googlesheets4::sheet_append(ss = log_id ,
+                                data =  .,
+                                sheet = sheetName_duplicationLog)
 
   # Extract the google id of the new duplicated sheet:
   #id_newSheet <- apiResponse$id
@@ -163,13 +176,13 @@ duplicateIndicator <- function(Indicator,
 
   # Log the metadata of the new sheet to the google sheet
 
-  df_newSheetInfo %>%
-    mutate(`Old URL` = toURL(id_oldSheet),
-           Date = Sys.Date()) %>%
-    select(Date, Source, Indicator = name, `New URL` = docURL, `Old URL`) %>%
-    googlesheets4::sheet_append(ss = log_id ,
-                                data =  .,
-                                sheet = sheetName_duplicationLog)
+  # df_newSheetInfo %>%
+  #   mutate(`Old URL` = toURL(id_oldSheet),
+  #          Date = Sys.Date()) %>%
+  #   select(Date, Source, Indicator = name, `New URL` = docURL, `Old URL`) %>%
+  #   googlesheets4::sheet_append(ss = log_id ,
+  #                               data =  .,
+  #                               sheet = sheetName_duplicationLog)
   return(df_newSheetInfo)
 
 }
