@@ -8,5 +8,7 @@ Description: tbd
 License: tbd
 Encoding: UTF-8
 LazyData: true
-Imports: tidyverse, magick, googlesheets4, dplyr, googledrive, pdftools
-
+Imports: tidyverse, magrittr, magick, googlesheets4, dplyr, googledrive, pdftools,Microsoft365R, RSelenium, gargle, httr, rvest, stringr, tidyr, xml2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
